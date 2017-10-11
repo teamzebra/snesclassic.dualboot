@@ -1,0 +1,18 @@
+[Desktop Entry]
+Type=Application
+Exec=/bin/switch_to_nes
+Path=/var/lib/clover/profiles/0/FOLDER
+Name=Switch to NES Classic
+Icon=/usr/share/games/CLV-S-00NES/CLV-S-00NES.png
+
+[X-CLOVER Game]
+Code=CLV-S-00NES
+TestID=777
+ID=0
+Players=1
+Simultaneous=0
+ReleaseDate=9999-88-88
+SaveCount=0
+SortRawTitle=Юswitch to nes classic
+SortRawPublisher=ZZZZZZZZZY
+Copyright=skogaby

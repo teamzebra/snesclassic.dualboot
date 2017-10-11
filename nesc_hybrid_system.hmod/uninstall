@@ -1,0 +1,23 @@
+# remove our custom files
+rm $rootfs/bin/clover-factory-reset-nes
+rm $rootfs/bin/clover-kachikachi
+rm $rootfs/bin/clover-mcp-nes
+rm $rootfs/bin/clover-menu-reset-nes
+rm $rootfs/bin/clover-production-test-menu-nes
+rm $rootfs/bin/clover-ui-nes
+rm $rootfs/bin/kachikachi
+rm $rootfs/bin/ReedPlayer-Clover-nes
+rm $rootfs/bin/switch_to_nes
+rm $rootfs/bin/switch_to_snes
+rm -r $rootfs/etc/share/applications/
+rm -r $rootfs/etc/share/clover-mcp/
+rm -r $rootfs/etc/share/clover-ui/
+rm -r $rootfs/etc/share/kachikachi/
+rm -r $rootfs/etc/share/legal/
+rm -r $rootfs/etc/share/locale/
+rm -r $rootfs/etc/share/reed-libs/
+rm $rootfs/lib/liblzo2.so
+rm $rootfs/lib/liblzo2.so.2
+rm $rootfs/lib/liblzo2.so.2.0.0
+rm -r $rootfs/usr/share/games/CLV-S-00NES/
+rm -r $rootfs/usr/share/games/nes/
