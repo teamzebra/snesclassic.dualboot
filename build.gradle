@@ -16,3 +16,11 @@ dependencies {
     compile group: 'commons-io', name: 'commons-io', version: '2.5'
     compile group: 'com.google.guava', name: 'guava', version: '23.0'
 }
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'com.teamzebra.snesclassic.Main'
+        )
+    }
+}
