@@ -20,5 +20,5 @@ rm -r $rootfs/etc/share/reed-libs/
 rm $rootfs/lib/liblzo2.so
 rm $rootfs/lib/liblzo2.so.2
 rm $rootfs/lib/liblzo2.so.2.0.0
-rm -r $rootfs/usr/share/games/CLV-S-00NES/
 rm -r $rootfs/usr/share/games/nes/
+rm -r $rootfs/etc/nesgames/

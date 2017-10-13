@@ -62,6 +62,11 @@ public class Main {
         verifyBundledHmodFiles();
         System.out.println("Pre-bundled HMOD files verified successfully!");
 
+        // verify that the bundled files for the NESC launcher weren't deleted
+        System.out.println("Verifying that the pre-bundled NESC launcher files are present...");
+        verifyBundledNescLauncherFiles();
+        System.out.println("Pre-bundled NESC launcher files verified successfully!");
+
         // detect which dump file we need to extract
         System.out.println("Detecting NESC dump archive file...");
         detectNESCDump();
@@ -92,7 +97,8 @@ public class Main {
         patchBinaryFilesInHmod();
         System.out.println("Patched binary files successfully!");
 
-        System.out.println("Complete! Install the resulting HMOD folder using hakchi2");
+        System.out.println("Complete! Install the resulting HMOD using hakchi2, and copy the CLV-S-00NES");
+        System.out.println("folder to the games_snes folder in hakchi to sync it to your console.");
     }
 
     /**
@@ -104,12 +110,10 @@ public class Main {
         verifyHmodEntityExists("uninstall");
         verifyHmodEntityExists("bin/switch_to_nes");
         verifyHmodEntityExists("bin/switch_to_snes");
-        verifyHmodEntityExists("usr/share/games/CLV-S-00NES/CLV-S-00NES.desktop");
-        verifyHmodEntityExists("usr/share/games/CLV-S-00NES/CLV-S-00NES.png");
-        verifyHmodEntityExists("usr/share/games/CLV-S-00NES/CLV-S-00NES_small.png");
-        verifyHmodEntityExists("usr/share/games/nes/kachikachi/CLV-P-0SNES/CLV-P-0SNES.desktop");
-        verifyHmodEntityExists("usr/share/games/nes/kachikachi/CLV-P-0SNES/CLV-P-0SNES.png");
-        verifyHmodEntityExists("usr/share/games/nes/kachikachi/CLV-P-0SNES/CLV-P-0SNES_small.png");
+        verifyHmodEntityExists("bin/switch_to_nes_child");
+        verifyHmodEntityExists("etc/nesgames/CLV-P-0SNES/CLV-P-0SNES.desktop");
+        verifyHmodEntityExists("etc/nesgames/CLV-P-0SNES/CLV-P-0SNES.png");
+        verifyHmodEntityExists("etc/nesgames/CLV-P-0SNES/CLV-P-0SNES_small.png");
     }
 
     /**
@@ -121,6 +125,24 @@ public class Main {
         if (!(new File(String.format("%s/%s", HMOD_FOLDER, path)).exists())) {
             throw new RuntimeException(String.format(
                     "'%s' not found within the HMOD directory, please redownload the application", path));
+        }
+    }
+
+    /**
+     * Verifies that the NES launcher script is present.
+     */
+    private static void verifyBundledNescLauncherFiles() {
+        final String[] files = new String[] {
+                "CLV-S-00NES/CLV-S-00NES.desktop",
+                "CLV-S-00NES/CLV-S-00NES.png",
+                "CLV-S-00NES/CLV-S-00NES_small.png"
+        };
+
+        for (String f : files) {
+            if (!(new File(f).exists())) {
+                throw new RuntimeException(String.format(
+                        "'%s' not found, please redownload the application", f));
+            }
         }
     }
 
@@ -211,7 +233,7 @@ public class Main {
         copyFileFromDumpToHmod("usr/lib/liblzo2.so.2.0.0", "lib/liblzo2.so.2.0.0");
 
         // copy /usr/share/games/nes/kachikachi
-        copyDirectoryFromDumpToHmod("usr/share/games/nes/kachikachi", "usr/share/games/nes/kachikachi");
+        copyDirectoryFromDumpToHmod("usr/share/games/nes/kachikachi", "etc/nesgames");
     }
 
     /**
@@ -266,9 +288,12 @@ public class Main {
                 "Exec=/bin/clover-ui-nes");
         replaceStringsInFile("etc/share/applications/clover-mcp.desktop", ImmutableMap.of(
                 "/usr/share/games/nes/kachikachi",
-                "/var/lib/hakchi/rootfs/usr/share/games/nes/kachikachi",
-                "= /usr/share/",
-                "= /etc/share/"));
+                "/etc/nesgames",
+                "/usr/share/applications",
+                "/etc/share/applications",
+                "/usr/share/clover-mcp/",
+                "/etc/share/clover-mcp/"
+                ));
 
         // patch the bin scripts
         replaceStringInFile("bin/clover-menu-reset-nes",
@@ -299,7 +324,7 @@ public class Main {
                     "CLV-P-NABQE", "CLV-P-NABRE", "CLV-P-NABVE", "CLV-P-NABXE", "CLV-P-NACBE", "CLV-P-NACDE",
                     "CLV-P-NACHE", "PRODUCTION-TESTS" };
         } else if (chosenDumpFile == HVC_105_DUMP) {
-            // this is a JAP dump
+            // this is a JPN dump
             gamesList = new String[] { "CLV-P-HAAAJ", "CLV-P-HAACJ", "CLV-P-HAADJ", "CLV-P-HAAEJ", "CLV-P-HAAHJ",
                     "CLV-P-HAAMJ", "CLV-P-HAANJ", "CLV-P-HAAPJ", "CLV-P-HAAQJ", "CLV-P-HAARJ", "CLV-P-HAASJ",
                     "CLV-P-HAAUJ", "CLV-P-HAAWJ", "CLV-P-HAAXJ", "CLV-P-HABBJ", "CLV-P-HABCJ", "CLV-P-HABLJ",
@@ -309,11 +334,11 @@ public class Main {
         }
 
         for (String gameCode : gamesList) {
-            replaceStringsInFile(String.format("usr/share/games/nes/kachikachi/%1$s/%1$s.desktop", gameCode), ImmutableMap.of(
+            replaceStringsInFile(String.format("etc/nesgames/%1$s/%1$s.desktop", gameCode), ImmutableMap.of(
                     "/usr/bin/clover-kachikachi",
                     "/bin/clover-kachikachi-wr",
                     "/usr/share/games/nes/kachikachi",
-                    "/var/lib/hakchi/rootfs/usr/share/games/nes/kachikachi"
+                    "/etc/nesgames"
             ));
         }
     }

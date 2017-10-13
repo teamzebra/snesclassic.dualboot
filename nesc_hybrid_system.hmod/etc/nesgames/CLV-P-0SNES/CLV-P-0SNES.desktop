@@ -3,7 +3,7 @@ Type=Application
 Exec=/bin/switch_to_snes
 Path=/var/lib/clover/profiles/0/FOLDER
 Name=Switch to SNES Classic
-Icon=/var/lib/hakchi/rootfs/usr/share/games/nes/kachikachi/CLV-P-0SNES/CLV-P-0SNES.png
+Icon=/etc/nesgames/CLV-P-0SNES/CLV-P-0SNES.png
 
 [X-CLOVER Game]
 Code=CLV-P-0SNES
