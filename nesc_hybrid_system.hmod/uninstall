@@ -8,6 +8,7 @@ rm $rootfs/bin/clover-ui-nes
 rm $rootfs/bin/kachikachi
 rm $rootfs/bin/ReedPlayer-Clover-nes
 rm $rootfs/bin/switch_to_nes
+rm $rootfs/bin/switch_to_nes_child
 rm $rootfs/bin/switch_to_snes
 rm -r $rootfs/etc/share/applications/
 rm -r $rootfs/etc/share/clover-mcp/
