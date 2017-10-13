@@ -54,8 +54,8 @@ public class Main {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        System.out.println("SNES / NES Classic Hybrid Dual Boot Tool v0.1");
-        System.out.println("By TeamZebra: https://github.com/teamzebra");
+        System.out.println("SNES / NES Classic Hybrid Dual Boot Tool v0.2");
+        System.out.println("By TeamZebra: https://github.com/teamzebra/snesclassic.dualboot");
 
         // verify that the bundled files for the resulting HMOD weren't deleted
         System.out.println("Verifying that the pre-bundled HMOD files are present...");
