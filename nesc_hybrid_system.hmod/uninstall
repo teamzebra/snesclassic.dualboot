@@ -10,6 +10,7 @@ rm $rootfs/bin/ReedPlayer-Clover-nes
 rm $rootfs/bin/switch_to_nes
 rm $rootfs/bin/switch_to_nes_child
 rm $rootfs/bin/switch_to_snes
+rm $rootfs/bin/hybrid_nesc_kachikachi_wr
 rm -r $rootfs/etc/share/applications/
 rm -r $rootfs/etc/share/clover-mcp/
 rm -r $rootfs/etc/share/clover-ui/
@@ -20,5 +21,4 @@ rm -r $rootfs/etc/share/reed-libs/
 rm $rootfs/lib/liblzo2.so
 rm $rootfs/lib/liblzo2.so.2
 rm $rootfs/lib/liblzo2.so.2.0.0
-rm -r $rootfs/usr/share/games/nes/
 rm -r $rootfs/etc/nesgames/

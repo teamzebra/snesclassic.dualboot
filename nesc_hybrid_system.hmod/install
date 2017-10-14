@@ -1,9 +1,6 @@
 # copy over our custom files
 transfer_default
 
-# fix up the clover-kachikachi-wr
-sed -i 's@/usr/bin/clover-kachikachi@/bin/clover-kachikachi@g' $rootfs/bin/clover-kachikachi-wr
-
 # set up the file permissions
 chmod +x $rootfs/bin/*
 

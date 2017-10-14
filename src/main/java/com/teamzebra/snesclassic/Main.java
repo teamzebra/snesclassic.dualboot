@@ -54,7 +54,7 @@ public class Main {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        System.out.println("SNES / NES Classic Hybrid Dual Boot Tool v0.2");
+        System.out.println("SNES / NES Classic Hybrid Dual Boot Tool v0.3");
         System.out.println("By TeamZebra: https://github.com/teamzebra/snesclassic.dualboot");
 
         // verify that the bundled files for the resulting HMOD weren't deleted
@@ -111,6 +111,7 @@ public class Main {
         verifyHmodEntityExists("bin/switch_to_nes");
         verifyHmodEntityExists("bin/switch_to_snes");
         verifyHmodEntityExists("bin/switch_to_nes_child");
+        verifyHmodEntityExists("bin/hybrid_nesc_kachikachi_wr");
         verifyHmodEntityExists("etc/nesgames/CLV-P-0SNES/CLV-P-0SNES.desktop");
         verifyHmodEntityExists("etc/nesgames/CLV-P-0SNES/CLV-P-0SNES.png");
         verifyHmodEntityExists("etc/nesgames/CLV-P-0SNES/CLV-P-0SNES_small.png");
@@ -336,7 +337,7 @@ public class Main {
         for (String gameCode : gamesList) {
             replaceStringsInFile(String.format("etc/nesgames/%1$s/%1$s.desktop", gameCode), ImmutableMap.of(
                     "/usr/bin/clover-kachikachi",
-                    "/bin/clover-kachikachi-wr",
+                    "/bin/hybrid_nesc_kachikachi_wr",
                     "/usr/share/games/nes/kachikachi",
                     "/etc/nesgames"
             ));

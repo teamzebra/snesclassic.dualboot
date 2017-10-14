@@ -1,0 +1,35 @@
+#!/bin/sh
+# Wrapper for kachikachi
+# You can add extra command line arguments to all games at once
+# using "cfg_nes_extra_args" variable in p0000_config
+# or disable epilepsy protection using "cfg_disable_armet=y"
+# We need to lay down this file instead of using the one
+# that hakchi provides, because hakchi updates all /bin scripts
+# on each game sync and we need a different kachikachi path.
+
+source /etc/preinit
+script_init
+
+filename="$(readlink -f "$1")"
+filebase="$(basename "$filename")"
+extension="${filebase##*.}"
+tmppath="$temppath/rom"
+if [ "$extension" == "7z" ]; then
+  rm -rf "$tmppath"
+  mkdir -p "$tmppath"
+  cd "$tmppath"
+  tiny7zx x "$filename"
+  filename="$tmppath/$(ls)"
+fi
+if [ "$extension" == "gz" ]; then
+  rm -rf "$tmppath"
+  mkdir -p "$tmppath"
+  gunzip -c > "$tmppath/$filebase"
+  filename="$tmppath/$filebase"
+fi
+shift
+
+args="$filename $@ $cfg_nes_extra_args"
+[ "$cfg_disable_armet" == "y" ] && args="$(echo $args | sed 's/--enable-armet//g')"
+
+exec /bin/clover-kachikachi $args
